@@ -95,14 +95,10 @@ void OnRxDone(uint8_t *payload, uint16_t size, int16_t rssiValue, int8_t snrValu
     display.setTextAlignment(TEXT_ALIGN_CENTER);
     x = display.width()/2;
     y = display.height()/2-5;
-
+    char tempStr[10] =""; // Buffer to hold the converted float as a string
+    dtostrf(receivedTemp, 6, 2, tempStr); // Convert float to string with 6 total digits and 2 decimals
+    String tempDisplay = String(tempStr) + " °C";
+    display.drawString(x, y, tempDisplay);
+    display.display();
     
-    if(receivedTemp>0){
-      char tempStr[10] =""; // Buffer to hold the converted float as a string
-      dtostrf(receivedTemp, 6, 2, tempStr); // Convert float to string with 6 total digits and 2 decimals
-      String tempDisplay = String(tempStr) + " °C";
-      display.drawString(x, y, tempDisplay);
-      //.print(tempStr);
-      display.display();
-    }
 }
